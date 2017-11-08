@@ -26,7 +26,7 @@ install:
   - echo -e '[defaults]\nroles_path = ../' > ansible.cfg
 
 script:
-  #- for i in $TYPOS; do echo; echo "$i"; git log -p $TRAVIS_COMMIT_RANGE | grep -a -2 "$i"; test "$?" != "0" || exit 1; done
+  - for i in $TYPOS; do echo; echo "$i"; git log -p $TRAVIS_COMMIT_RANGE | grep -a -2 "$i"; test "$?" != "0" || exit 1; done
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/test.yml
   - >

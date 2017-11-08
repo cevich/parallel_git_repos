@@ -79,3 +79,12 @@ Author Information
 ------------------
 
 Causing trouble and inciting mayhem with Linux since Windows 98
+
+
+Continuous Integration
+-----------------------
+
+Travis CI: |ci_status|
+
+.. |ci_status| image:: https://travis-ci.org/cevich/parallel_git_repos.svg?branch=master
+               :target: https://travis-ci.org/cevich/parallel_git_repos
