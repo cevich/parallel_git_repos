@@ -1,0 +1,20 @@
+galaxy_info:
+  author: Chris Evich
+  description: This role makes it simple to clone from multiple git repositories in parallel.
+  company: Red Hat
+  license: GPLv3
+  min_ansible_version: 2.4
+  platforms:
+    - name: all
+      versions:
+        - all
+  galaxy_tags:
+    - async
+    - asynchronous
+    - parallel
+    - git
+    - github
+    - repository
+    - clone
+
+dependencies: []

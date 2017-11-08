@@ -1,0 +1,40 @@
+---
+language: python
+branch:
+    only:
+        - master
+python:
+    - 2.7
+
+matrix:
+    fast_finish: true
+
+git:
+    submodules: false
+
+env:
+    global:
+        - TYPOS="'ecoh' 'roel' 'fixup!' 'squash!' 'FIXME' '<<<<<<<' '=======' '>>>>>>>'"
+        # fix vim syntax highlighting: "
+
+before_install:
+  - sudo apt-get update -qq
+  - pip install ansible==2.4
+
+install:
+  # Add ansible.cfg to pick up roles path.
+  - echo -e '[defaults]\nroles_path = ../' > ansible.cfg
+
+script:
+  #- for i in $TYPOS; do echo; echo "$i"; git log -p $TRAVIS_COMMIT_RANGE | grep -a -2 "$i"; test "$?" != "0" || exit 1; done
+  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+  - ansible-playbook -i tests/inventory tests/test.yml
+  - >
+        ansible-playbook -i tests/inventory tests/test.yml
+        | grep -q 'changed=0.*failed=0'
+        && (echo 'Idempotence test: pass' && exit 0)
+        || (echo 'Idempotence test: fail' && exit 1)
+  - stat tests/path/to/dir/{ansible,container,galaxy}/.git/HEAD
+
+notifications:
+    webhooks: https://galaxy.ansible.com/api/v1/notifications/

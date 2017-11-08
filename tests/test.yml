@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  vars:
+    git_ops:
+       - repo: "https://github.com/ansible/galaxy"
+         dest: "{{ playbook_dir }}/path/to/dir/galaxy"
+       - repo: "https://github.com/ansible/ansible"
+         dest: "{{ playbook_dir }}/path/to/dir/ansible"
+       - repo: "https://github.com/ansible/ansible-container"
+         dest: "{{ playbook_dir }}/path/to/dir/container"
+  roles:
+     - parallel_git_repos
