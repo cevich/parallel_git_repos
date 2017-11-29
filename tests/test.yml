@@ -10,4 +10,4 @@
        - repo: "https://github.com/ansible/ansible-container"
          dest: "{{ playbook_dir }}/path/to/dir/container"
   roles:
-     - parallel_git_repos
+     - cevich.parallel_git_repos

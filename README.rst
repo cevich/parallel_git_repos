@@ -59,7 +59,7 @@ License
 -------
 
     parallel_git_repos makes it simple to clone from multiple git repositories in parallel.
-    Copyright (C) 2017  Christopher. C Evich
+    Copyright (C) 2017  Christopher C. Evich
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
