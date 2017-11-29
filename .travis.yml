@@ -25,10 +25,16 @@ install:
   # Add ansible.cfg to pick up roles path.
   - echo -e '[defaults]\nroles_path = ../' > ansible.cfg
   # Galaxy would normally install this with a cevich prefix
-  - ROLEBASE=$(basename $PWD) cd .. && ln -s $ROLEBASE cevich.$ROLEBASE
+  - export ROLEBASE="$(basename $PWD)" && ln -sfv "$ROLEBASE" "../cevich.$ROLEBASE"
 
 script:
-  - for i in $TYPOS; do echo; echo "$i"; git log -p $TRAVIS_COMMIT_RANGE | grep -a -2 "$i"; test "$?" != "0" || exit 1; done
+  - >
+        echo "$(git log -1 --format=%H origin/master)" > /tmp/start;
+        echo "$(git log -1 --format=%H HEAD)" > /tmp/end;
+        git log -p $(cat /tmp/start)..$(cat /tmp/end) -- . ':!.travis.yml' &> /tmp/commits;
+        echo "Typos found:";
+        egrep -a -i -2 "$TYPOS" /tmp/commits | tee /tmp/typos;
+        test "$(cat /tmp/typos | wc -l)" -eq "0" || exit 1;
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/test.yml
   - >
