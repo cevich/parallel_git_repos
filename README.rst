@@ -1,12 +1,12 @@
-Role Name
-=========
+Parallel Git Repos
+==================
 
 This role makes it simple to clone from multiple git repositories in parallel.
 
 Requirements
 ------------
 
-Same as the stock Ansible 2.3 ``git`` module itself.
+Same as the stock Ansible 2.4 ``git`` module itself.
 
 Role Variables
 --------------
