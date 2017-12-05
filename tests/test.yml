@@ -1,6 +1,7 @@
 ---
 
 - hosts: all
+  gather_subset: network
   vars:
     git_ops:
        - repo: "https://github.com/ansible/galaxy"
